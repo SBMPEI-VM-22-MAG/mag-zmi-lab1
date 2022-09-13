@@ -1,0 +1,7 @@
+{
+  "name": "mag-zmi-lab1",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
