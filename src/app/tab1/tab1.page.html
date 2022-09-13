@@ -81,8 +81,10 @@
   </ion-row>
 </ion-grid>
 
-<ion-grid *ngIf="numCols > 0 || numRows > 0" fixed>
-  <ion-row *ngFor="let item of arrExperts">
+<ion-grid class="table-input" *ngIf="numCols > 0 || numRows > 0" fixed>
+  <ion-row class="ion-text-center" *ngFor="let item of arrExperts; let idx = index">
+    <div>{{ idx + 1 }}</div>
+    <div></div>
     <ion-col
       *ngFor="let item of arrProjects"
     >
@@ -98,8 +100,8 @@
           </ion-select>
         </ion-item>
       </ion-list>
-
     </ion-col>
+    <div class="hr"></div>
   </ion-row>
 </ion-grid>
 
