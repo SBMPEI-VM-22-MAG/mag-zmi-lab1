@@ -36,4 +36,34 @@
       <ion-text color="primary">{{ item | number: '.1-2'}}</ion-text>
     </ion-col>
   </ion-row>
+
+  <ion-row class="my-custom-table ion-text-center">
+    <ion-col>
+      <ion-text color="danger">
+        Result ranks
+      </ion-text>
+    </ion-col>
+    <ion-col
+      *ngFor="let item of rowResult.value"
+      class="ion-padding-top ion-padding-bottom"
+    >
+      <ion-text color="primary">{{ item | number: '.1-2'}}</ion-text>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="ion-margin-top">
+    <ion-col size="12">
+      <ion-text color="danger">
+        Answer
+      </ion-text>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="my-custom-table">
+    <ion-col size="12">
+      <div *ngFor="let item of resString">
+        [{{ item.name }}: {{ item.rank }}]
+      </div>
+    </ion-col>
+  </ion-row>
 </ion-grid>
