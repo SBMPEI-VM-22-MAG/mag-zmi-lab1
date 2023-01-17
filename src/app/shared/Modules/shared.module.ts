@@ -4,7 +4,7 @@ import { NumMarkToStrPipe } from '../Pipes/num-mark-to-str.pipe';
 import { MeanRanksComponent } from '../Components/mean-ranks/mean-ranks.component';
 import { MedianComponent } from '../Components/median/median.component';
 import { KemenyComponent } from '../Components/kemeny/kemeny.component';
-
+import { IonicModule } from '@ionic/angular';
 
 
 @NgModule({
@@ -15,13 +15,15 @@ import { KemenyComponent } from '../Components/kemeny/kemeny.component';
     KemenyComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    IonicModule
   ],
   exports: [
     NumMarkToStrPipe,
     MeanRanksComponent,
     MedianComponent,
-    KemenyComponent
+    KemenyComponent,
+    IonicModule
   ]
 })
 export class SharedModule { }

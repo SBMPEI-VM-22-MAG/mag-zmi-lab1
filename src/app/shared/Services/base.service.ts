@@ -27,7 +27,7 @@ export class BaseService {
   }
 
   public getColValues(idx: number, table: IRow[]): IRow {
-    let res: IRow;
+    let res: IRow = { value: [] };
     if (table.length > 0) {
       if (table[0].value.length > 0 && idx <= table[0].value.length) {
         let values: number[] = [];

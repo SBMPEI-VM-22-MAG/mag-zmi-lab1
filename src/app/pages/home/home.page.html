@@ -151,7 +151,9 @@
 
               <div [ngSwitch]="segmentValue">
                 <ng-template ngSwitchCase="mean">
-                  <app-mean-ranks></app-mean-ranks>
+                  <app-mean-ranks
+                    [tableRanks]="dataTranform"
+                  ></app-mean-ranks>
                 </ng-template>
 
                 <ng-template ngSwitchCase="median">
