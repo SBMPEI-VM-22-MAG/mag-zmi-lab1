@@ -163,7 +163,9 @@
                 </ng-template>
 
                 <ng-template ngSwitchCase="kemeny">
-                  <app-kemeny></app-kemeny>
+                  <app-kemeny
+                    [tableRanks]="dataTranform"
+                  ></app-kemeny>
                 </ng-template>
               </div>
 
