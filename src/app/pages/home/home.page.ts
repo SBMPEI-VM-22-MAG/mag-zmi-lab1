@@ -23,7 +23,7 @@ export class HomePage implements OnInit {
   dataTranform: IRow[] = [];
   isComputed: boolean = !false;
 
-  private _segmentVal: string = 'mean';
+  private _segmentVal: string = 'kemeny';
 
   get segmentValue(): string {
     return this._segmentVal;

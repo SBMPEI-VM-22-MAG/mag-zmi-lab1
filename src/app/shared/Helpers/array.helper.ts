@@ -1,3 +1,4 @@
+import { ICell, IRowCells } from '../Models/binary-matrix.model';
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable curly */
 /* eslint-disable @typescript-eslint/no-inferrable-types */
@@ -9,15 +10,15 @@ export class ArrayHelper {
   }
 
   static sortNumberValues(
-    a: { name: string; rank: number },
-    b: { name: string; rank: number }
+    a: { name: string; rank: number } | ICell,
+    b: { name: string; rank: number } | ICell
   ): number {
     return a.rank < b.rank ? -1 : a.rank > b.rank ? 1 : 0;
   }
 
   static sortStringValues(
-    a: { name: string; rank: number },
-    b: { name: string; rank: number }
+    a: { name: string; rank: number } | ICell,
+    b: { name: string; rank: number } | ICell
   ): number {
     return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
   }

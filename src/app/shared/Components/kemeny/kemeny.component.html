@@ -1,3 +1,69 @@
-<p>
-  kemeny works!
-</p>
+<ion-grid fixed>
+  <ion-row *ngFor="let mtx of arrayBinaryMtx; let idx = index">
+    <ion-col>
+
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col>
+            <ion-text color="tertiary">
+              <h3>Expert #{{ idx + 1 }}. binary relation matrix</h3>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="my-custom-table ion-text-center">
+          <ion-col
+            *ngFor="let item of mtx.ExpertRankingsValSortRanks"
+            class="ion-padding-top ion-padding-bottom"
+          >
+            <ion-text color="danger">
+              <b>{{ item.name }}</b>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <div class="hr"></div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="my-custom-table ion-text-center">
+          <ion-col class="ion-padding-top ion-padding-bottom"></ion-col>
+          <ion-col
+            *ngFor="let item of mtx.ExpertRankingsVal; let numIdx = index"
+            class="ion-padding-top ion-padding-bottom"
+          >
+            <b>{{ (numIdx + 1) | numMarkToStr }}</b>
+          </ion-col>
+        </ion-row>
+
+        <ion-row
+          class="my-custom-table ion-text-center"
+          *ngFor="let rowBin of mtx.MatrixBinary; let numIdx = index"
+        >
+          <ion-col class="ion-padding-top ion-padding-bottom">
+            <b>{{ (numIdx + 1) | numMarkToStr }}</b>
+          </ion-col>
+          <ion-col
+            *ngFor="let item of rowBin.value"
+            class="ion-padding-top ion-padding-bottom"
+          >
+            <ion-text color="tertiary">
+              <b>{{ item }}</b>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <div class="hr"></div>
+            <div class="hr"></div>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+
+    </ion-col>
+  </ion-row>
+</ion-grid>
