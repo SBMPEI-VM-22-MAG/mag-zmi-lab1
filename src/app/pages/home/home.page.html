@@ -4,6 +4,50 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-no-padding">
+  <ion-grid fixed>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="5">
+        <ion-button
+          expand="block"
+          (click)="onCreateObjFromHomeWork()"
+        >
+          <ion-icon slot="start" name="reader-outline"></ion-icon>
+          Variant #22
+        </ion-button>
+      </ion-col>
+      <ion-col size="5">
+        <ion-button
+          expand="block"
+          fill="outline"
+          (click)="onCreateBaseTable()"
+        >
+          <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+          Create new
+        </ion-button>
+      </ion-col>
+    </ion-row>
 
+    <ion-row *ngIf="obj.IsNotEmpty" class="ion-justify-content-center">
+      <ion-col size="12">
+        <ion-grid fixed>
+          <ion-row
+            *ngFor="let row of obj.table; let idx = index"
+            class="my-custom-table ion-justify-content-center"
+          >
+            <ion-col style="background-color: aqua;">
+              <span>E{{ idx + 1 }}</span>
+            </ion-col>
+
+            <ion-col
+              *ngFor="let val of row.value"
+              [ngClass]="{'my-custom-bg-color': idx % 2 === 0 }"
+            >
+              <span>{{ val | numMarkToStr }}</span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

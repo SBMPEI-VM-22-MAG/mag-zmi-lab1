@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/prefer-for-of */
 /* eslint-disable curly */
 /* eslint-disable prefer-const */
@@ -16,6 +17,11 @@ export class BaseModel {
 
   private _cols: number = 0;
   private _rows: number = 0;
+
+  public get IsNotEmpty(): boolean {
+    if (this._cols !== 0 || this._rows !== 0) return true;
+    else return false;
+  }
 
   public get colsCount(): number {
     return this._cols;
@@ -77,7 +83,7 @@ export class BaseModel {
 
     if (cols !== 0 && rows !== 0) {
       for(let i = 0; i < rows; i++) {
-        let rowVals: IRow;
+        let rowVals: IRow = { value: [] };
         for(let j = 0; j < cols; j++) {
           rowVals.value.push(j + 1);
         }

@@ -1,13 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NumMarkToStrPipe } from '../Pipes/num-mark-to-str.pipe';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    NumMarkToStrPipe
+  ],
   imports: [
     CommonModule
   ],
-  exports: []
+  exports: [
+    NumMarkToStrPipe
+  ]
 })
 export class SharedModule { }
