@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
+import { BaseService } from './base.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class KemenyMedianService {
+export class KemenyMedianService extends BaseService {
 
-  constructor() { }
+  constructor() {
+    super();
+  }
 }

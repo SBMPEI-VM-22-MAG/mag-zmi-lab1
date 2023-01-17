@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/member-ordering */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable max-len */
 /* eslint-disable curly */
 /* eslint-disable @typescript-eslint/member-delimiter-style */
@@ -5,11 +8,9 @@
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable prefer-const */
 import { Component, OnInit } from '@angular/core';
-import { ArithMeanRanksService } from '../../shared/Services/arith-mean-ranks.service';
-import { MedianRanksService } from '../../shared/Services/median-ranks.service';
-import { KemenyMedianService } from '../../shared/Services/kemeny-median.service';
 import { BaseModel, IRow } from '../../shared/Models/base.model';
-import { AlertController, AlertOptions, ToastController } from '@ionic/angular';
+import { AlertController, AlertOptions, SegmentCustomEvent, ToastController } from '@ionic/angular';
+import { BaseService } from '../../shared/Services/base.service';
 
 @Component({
   selector: 'app-home',
@@ -19,16 +20,32 @@ import { AlertController, AlertOptions, ToastController } from '@ionic/angular';
 export class HomePage implements OnInit {
 
   obj: BaseModel = new BaseModel(0, 0);
+  dataTranform: IRow[] = [];
+  isComputed: boolean = !false;
+
+  private _segmentVal: string = 'mean';
+
+  get segmentValue(): string {
+    return this._segmentVal;
+  }
 
   constructor(
     private toastController: ToastController,
     private alertController: AlertController,
-    private srv1: ArithMeanRanksService,
-    private srv2: MedianRanksService,
-    private srv3: KemenyMedianService
+    private srvBase: BaseService,
   ) { }
 
   ngOnInit() {
+  }
+
+  onLog(ev: any) {
+    console.log(ev);
+  }
+
+  onChangeSegment(ev: SegmentCustomEvent) {
+    // console.log(ev.detail.value);
+
+    this._segmentVal = ev.detail.value;
   }
 
   onCreateObjFromHomeWork() {
@@ -59,7 +76,9 @@ export class HomePage implements OnInit {
       this.obj.setRowValues(i, rows[i]);
     }
 
-    console.log(this.obj);
+    this.dataTranform = this.srvBase.sourceDataTransform(this.obj);
+
+    // console.log(this.obj);
   }
 
   async onCreateBaseTable() {
@@ -93,6 +112,7 @@ export class HomePage implements OnInit {
             }
 
             this.obj = new BaseModel(Number(data.cols), Number(data.rows));
+            this.dataTranform = this.srvBase.sourceDataTransform(this.obj);
             const msg = `Success!! You created table with [cols: ${Number(data.cols)}, rows: ${Number(data.rows)}]`;
             this.presentSuccesToast(msg);
             return true;

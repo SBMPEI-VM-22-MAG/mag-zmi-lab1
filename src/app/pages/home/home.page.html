@@ -27,8 +27,10 @@
         </ion-button>
       </ion-col>
     </ion-row>
+  </ion-grid>
 
-    <ion-row *ngIf="obj.IsNotEmpty" class="ion-justify-content-center">
+  <ion-grid *ngIf="obj.IsNotEmpty" fixed>
+    <ion-row class="ion-justify-content-center">
       <ion-col size="12">
         <ion-grid fixed>
           <ion-row
@@ -49,5 +51,124 @@
         </ion-grid>
       </ion-col>
     </ion-row>
+
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="5">
+        <ion-button
+          expand="block"
+        >
+          <ion-icon slot="start" name="hardware-chip-outline"></ion-icon>
+          Compute
+        </ion-button>
+      </ion-col>
+      <ion-col size="5">
+        <ion-button
+          expand="block"
+          fill="outline"
+        >
+          <ion-icon slot="start" name="pencil-outline"></ion-icon>
+          Edit
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row
+      *ngIf="isComputed"
+      class="ion-justify-content-center"
+      style="border-top: 1px solid black; margin-top: 2em;"
+      class="ion-no-padding"
+    >
+      <ion-col size="12" class="ion-no-padding">
+        <ion-grid fixed class="ion-no-padding">
+
+          <ion-row class="ion-justify-content-center">
+            <ion-col size="12">
+              <ion-segment value="mean" (ionChange)="onChangeSegment($event)">
+                <ion-segment-button value="mean">
+                  <ion-label>Mean ranks</ion-label>
+                </ion-segment-button>
+
+                <ion-segment-button value="median">
+                  <ion-label>Median</ion-label>
+                </ion-segment-button>
+
+                <ion-segment-button value="kemeny">
+                  <ion-label>Kemeny</ion-label>
+                </ion-segment-button>
+              </ion-segment>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="ion-justify-content-center" style="margin-top: 1em;">
+            <ion-col size="12">
+              <ion-grid fixed>
+                <ion-row>
+                  <ion-col size="12">
+                    <ion-text color="primary">
+                      <h1>Sorce data transform</h1>
+                    </ion-text>
+                  </ion-col>
+                </ion-row>
+                <ion-row
+                  class="my-custom-table ion-text-center"
+                >
+                  <ion-col class="ion-padding-top ion-padding-bottom"></ion-col>
+                  <ion-col
+                    *ngFor="let item of dataTranform[0].value; let idx = index"
+                    style="background-color: bisque"
+                    class="ion-padding-top ion-padding-bottom"
+                  >
+                    <span>{{ 'a' + (idx + 1) }}</span>
+                  </ion-col>
+                </ion-row>
+
+                <ion-row
+                  *ngFor="let row of dataTranform; let idx = index"
+                  class="my-custom-table ion-text-center"
+                >
+                  <ion-col style="background-color: aqua;" class="ion-padding-top ion-padding-bottom">
+                    <span>E{{ idx + 1 }}</span>
+                  </ion-col>
+
+                  <ion-col
+                    *ngFor="let val of row.value"
+                    [ngClass]="{'my-custom-bg-color': idx % 2 === 0 }"
+                    class="ion-padding-top ion-padding-bottom"
+                  >
+                    <span>{{ val }}</span>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="ion-justify-content-center" class="ion-no-padding">
+            <ion-col size="12">
+
+              <ion-text color="secondary">
+                <h1>Results</h1>
+              </ion-text>
+
+              <div [ngSwitch]="segmentValue">
+                <ng-template ngSwitchCase="mean">
+                  <app-mean-ranks></app-mean-ranks>
+                </ng-template>
+
+                <ng-template ngSwitchCase="median">
+                  <app-median></app-median>
+                </ng-template>
+
+                <ng-template ngSwitchCase="kemeny">
+                  <app-kemeny></app-kemeny>
+                </ng-template>
+              </div>
+
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+      </ion-col>
+    </ion-row>
   </ion-grid>
+
 </ion-content>

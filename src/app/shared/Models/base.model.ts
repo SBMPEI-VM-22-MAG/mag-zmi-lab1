@@ -36,13 +36,13 @@ export class BaseModel {
     return this._table;
   }
 
-  public getRowValues(idx: number): IRow {
-    if(this._table.length > 0 && idx <= this._table.length) {
-      return this._table[idx];
-    } else {
-      return null;
-    }
-  }
+  // public getRowValues(idx: number): IRow {
+  //   if(this._table.length > 0 && idx <= this._table.length) {
+  //     return this._table[idx];
+  //   } else {
+  //     return null;
+  //   }
+  // }
 
   public setRowValues(idx: number, row: IRow) {
     if(this._table.length > 0 && idx <= this._table.length) {
@@ -50,29 +50,29 @@ export class BaseModel {
     }
   }
 
-  public getColValues(idx: number): IRow {
-    let res: IRow;
-    if (this._table.length > 0) {
-      if (this._table[0].value.length > 0 && idx <= this._table[0].value.length) {
-        let values: number[] = [];
-        this._table.forEach((item) => values.push(item.value[idx]));
-        res.value = values;
-        return res;
-      } else return null;
-    } else return null;
-  }
+  // public getColValues(idx: number): IRow {
+  //   let res: IRow;
+  //   if (this._table.length > 0) {
+  //     if (this._table[0].value.length > 0 && idx <= this._table[0].value.length) {
+  //       let values: number[] = [];
+  //       this._table.forEach((item) => values.push(item.value[idx]));
+  //       res.value = values;
+  //       return res;
+  //     } else return null;
+  //   } else return null;
+  // }
 
-  public setColValues(idx: number, row: IRow) {
-    if (this._table.length > 0 && row.value.length === this._table.length) {
-      if (this._table[0].value.length > 0 && idx <= this._table[0].value.length) {
-        let i = 0;
-        this._table.forEach((item) => {
-          item.value[idx] = row.value[i];
-          i++;
-        });
-      }
-    }
-  }
+  // public setColValues(idx: number, row: IRow) {
+  //   if (this._table.length > 0 && row.value.length === this._table.length) {
+  //     if (this._table[0].value.length > 0 && idx <= this._table[0].value.length) {
+  //       let i = 0;
+  //       this._table.forEach((item) => {
+  //         item.value[idx] = row.value[i];
+  //         i++;
+  //       });
+  //     }
+  //   }
+  // }
 
   constructor(
     cols: number,
