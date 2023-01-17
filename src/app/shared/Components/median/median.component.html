@@ -1,3 +1,29 @@
-<p>
-  median works!
-</p>
+<ion-grid fixed>
+  <ion-row class="my-custom-table ion-text-center">
+    <ion-col>
+      <ion-text color="danger">
+        Median ranks
+      </ion-text>
+    </ion-col>
+    <ion-col
+      *ngFor="let item of medianRanks.value"
+      class="ion-padding-top ion-padding-bottom"
+    >
+      <ion-text color="primary">{{ item }}</ion-text>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="my-custom-table ion-text-center">
+    <ion-col>
+      <ion-text color="danger">
+        Result ranks
+      </ion-text>
+    </ion-col>
+    <ion-col
+      *ngFor="let item of resultRanks.value"
+      class="ion-padding-top ion-padding-bottom"
+    >
+      <ion-text color="primary">{{ item }}</ion-text>
+    </ion-col>
+  </ion-row>
+</ion-grid>

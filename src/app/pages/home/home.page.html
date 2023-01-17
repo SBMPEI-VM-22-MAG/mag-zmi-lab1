@@ -157,7 +157,9 @@
                 </ng-template>
 
                 <ng-template ngSwitchCase="median">
-                  <app-median></app-median>
+                  <app-median
+                    [tableRanks]="dataTranform"
+                  ></app-median>
                 </ng-template>
 
                 <ng-template ngSwitchCase="kemeny">

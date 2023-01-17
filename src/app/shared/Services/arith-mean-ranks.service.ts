@@ -78,7 +78,7 @@ export class ArithMeanRanksService extends BaseService {
 
       intermed.sort(ArrayHelper.sortStringValues);
 
-      console.log(intermed);
+      // console.log(intermed);
 
       intermed.forEach(item => res.value.push(item.rank));
 
