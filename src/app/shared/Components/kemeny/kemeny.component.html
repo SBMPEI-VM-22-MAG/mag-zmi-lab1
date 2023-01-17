@@ -66,4 +66,91 @@
 
     </ion-col>
   </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-text color="secondary">
+        <h1>###################</h1>
+        <h1>###################</h1>
+      </ion-text>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-text color="danger">
+        <h1>Matrix pairwise distances</h1>
+      </ion-text>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="12">
+      <div class="hr"></div>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="my-custom-table ion-text-center">
+    <ion-col class="ion-padding-top ion-padding-bottom"></ion-col>
+    <ion-col
+      *ngFor="let item of pairwiseDistanceMatrix; let idx = index"
+      class="ion-padding-top ion-padding-bottom"
+    >
+      <b>{{ 'E' + (idx + 1) }}</b>
+    </ion-col>
+  </ion-row>
+
+  <ion-row
+    class="my-custom-table ion-text-center"
+    *ngFor="let row of pairwiseDistanceMatrix; let idx = index"
+  >
+    <ion-col class="ion-padding-top ion-padding-bottom">
+      <b>{{ 'E' + (idx + 1) }}</b>
+    </ion-col>
+    <ion-col
+      *ngFor="let item of row.value"
+      class="ion-padding-top ion-padding-bottom"
+    >
+      <ion-text color="tertiary">
+        <b>{{ item }}</b>
+      </ion-text>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="12">
+      <div class="hr"></div>
+      <div class="hr"></div>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-text color="danger">
+        <h1>Calculation of sums of distances across rows</h1>
+      </ion-text>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <div class="hr"></div>
+    </ion-col>
+  </ion-row>
+
+  <ion-row
+    class="my-custom-table ion-text-center"
+    *ngFor="let item of arrSum; let idx = index"
+  >
+    <ion-col class="ion-padding-top ion-padding-bottom">
+      <b>{{ 'E' + (idx + 1) }}</b>
+    </ion-col>
+    <ion-col
+      class="ion-padding-top ion-padding-bottom"
+    >
+      <ion-text color="tertiary">
+        <b>{{ item }}</b>
+      </ion-text>
+    </ion-col>
+  </ion-row>
+
 </ion-grid>

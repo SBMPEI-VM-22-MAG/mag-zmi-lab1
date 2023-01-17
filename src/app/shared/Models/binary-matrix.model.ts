@@ -19,6 +19,10 @@ export interface IRowCells {
   values: ICell[];
 }
 
+export interface IMatrixDistancesWithSum {
+
+}
+
 export class BinaryMatrixModel {
   private _expertRankings: ICell[] = [];
   private _matrixBinary: IRow[] = [];

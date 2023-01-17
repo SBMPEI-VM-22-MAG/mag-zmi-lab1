@@ -13,6 +13,8 @@ export class KemenyComponent implements OnInit, DoCheck {
 
   @Input() tableRanks: IRow[] = [];
   arrayBinaryMtx: BinaryMatrixModel[] = [];
+  pairwiseDistanceMatrix: IRow[] = [];
+  arrSum: number [] = [];
 
   constructor(
     private srv: KemenyMedianService
@@ -32,5 +34,7 @@ export class KemenyComponent implements OnInit, DoCheck {
       const mtx = new BinaryMatrixModel(item);
       this.arrayBinaryMtx.push(mtx);
     });
+    this.pairwiseDistanceMatrix = this.srv.getPairwiseDistanceMatrix(this.arrayBinaryMtx);
+    this.arrSum = this.srv.getCalculationOfSumsOfDistancesAcrossRows(this.pairwiseDistanceMatrix);
   }
 }
