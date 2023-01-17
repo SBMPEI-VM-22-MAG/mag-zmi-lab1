@@ -42,10 +42,10 @@ export class HomePage implements OnInit {
     console.log(ev);
   }
 
-  onChangeSegment(ev: SegmentCustomEvent) {
+  onChangeSegment(ev: any) {
     // console.log(ev.detail.value);
 
-    this._segmentVal = ev.detail.value;
+    this._segmentVal = (ev as SegmentCustomEvent).detail.value;
   }
 
   onCreateObjFromHomeWork() {
