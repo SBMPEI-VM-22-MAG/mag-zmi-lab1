@@ -36,47 +36,24 @@ export class BaseModel {
     return this._table;
   }
 
-  // public getRowValues(idx: number): IRow {
-  //   if(this._table.length > 0 && idx <= this._table.length) {
-  //     return this._table[idx];
-  //   } else {
-  //     return null;
-  //   }
-  // }
-
   public setRowValues(idx: number, row: IRow) {
     if(this._table.length > 0 && idx <= this._table.length) {
       this._table[idx] = row;
     }
   }
 
-  // public getColValues(idx: number): IRow {
-  //   let res: IRow;
-  //   if (this._table.length > 0) {
-  //     if (this._table[0].value.length > 0 && idx <= this._table[0].value.length) {
-  //       let values: number[] = [];
-  //       this._table.forEach((item) => values.push(item.value[idx]));
-  //       res.value = values;
-  //       return res;
-  //     } else return null;
-  //   } else return null;
-  // }
-
-  // public setColValues(idx: number, row: IRow) {
-  //   if (this._table.length > 0 && row.value.length === this._table.length) {
-  //     if (this._table[0].value.length > 0 && idx <= this._table[0].value.length) {
-  //       let i = 0;
-  //       this._table.forEach((item) => {
-  //         item.value[idx] = row.value[i];
-  //         i++;
-  //       });
-  //     }
-  //   }
-  // }
-
   constructor(
     cols: number,
-    rows: number
+    rows: number,
+    table: IRow[] = []
+  ) {
+    if (table.length === 0) this._constructorByColsRows(cols, rows);
+    else this._constructorByColsRowsAndTable(cols, rows, table);
+  }
+
+  private _constructorByColsRows(
+    cols: number,
+    rows: number,
   ) {
     this._cols = cols;
     this._rows = rows;
@@ -89,6 +66,19 @@ export class BaseModel {
         }
         this._table.push(rowVals);
       }
+    }
+  }
+
+  private _constructorByColsRowsAndTable(
+    cols: number,
+    rows: number,
+    table: IRow[]
+  ) {
+    this._cols = cols;
+    this._rows = rows;
+
+    if (cols !== 0 && rows !== 0) {
+      table.forEach(row => this._table.push(row));
     }
   }
 }

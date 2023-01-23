@@ -16,7 +16,7 @@
           Variant #22
         </ion-button>
       </ion-col>
-      <!-- <ion-col size="5">
+      <ion-col size="5">
         <ion-button
           expand="block"
           fill="outline"
@@ -25,8 +25,42 @@
           <ion-icon slot="start" name="add-circle-outline"></ion-icon>
           Create new
         </ion-button>
-      </ion-col> -->
+      </ion-col>
     </ion-row>
+
+    <ion-row *ngIf="obj.IsNotEmpty" class="ion-justify-content-center">
+      <ion-col size="3">
+        <ion-button
+          expand="block"
+          (click)="onCompute()"
+        >
+          <ion-icon slot="start" name="hardware-chip-outline"></ion-icon>
+          Compute
+        </ion-button>
+      </ion-col>
+      <ion-col size="3">
+        <ion-button
+          expand="block"
+          color="warning"
+          (click)="onEditTable()"
+        >
+          <ion-icon slot="start" name="pencil-outline"></ion-icon>
+          Edit
+        </ion-button>
+      </ion-col>
+
+      <ion-col size="3">
+        <ion-button
+          expand="block"
+          color="danger"
+          (click)="onClear()"
+        >
+          <ion-icon slot="start" name="close-outline"></ion-icon>
+          Clear
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
   </ion-grid>
 
   <ion-grid *ngIf="obj.IsNotEmpty" fixed>
@@ -51,26 +85,6 @@
         </ion-grid>
       </ion-col>
     </ion-row>
-
-    <!-- <ion-row class="ion-justify-content-center">
-      <ion-col size="5">
-        <ion-button
-          expand="block"
-        >
-          <ion-icon slot="start" name="hardware-chip-outline"></ion-icon>
-          Compute
-        </ion-button>
-      </ion-col>
-      <ion-col size="5">
-        <ion-button
-          expand="block"
-          fill="outline"
-        >
-          <ion-icon slot="start" name="pencil-outline"></ion-icon>
-          Edit
-        </ion-button>
-      </ion-col>
-    </ion-row> -->
 
     <ion-row
       *ngIf="isComputed"
