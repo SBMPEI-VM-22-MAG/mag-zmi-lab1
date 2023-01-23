@@ -1,10 +1,19 @@
+/* eslint-disable @typescript-eslint/semi */
 import { ICell, IRowCells } from '../Models/binary-matrix.model';
+import { IRow } from '../Models/base.model';
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable curly */
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/member-delimiter-style */
 export class ArrayHelper {
+
+  static copyIRowArray(row: IRow): IRow {
+    let res: IRow = { value: [] };
+    row.value.forEach(item => res.value.push(item));
+    return res;
+  }
+
   static sortNumberArray(a: number, b: number): number {
     return (a < b) ? -1 : (a > b) ? 1 : 0;
   }

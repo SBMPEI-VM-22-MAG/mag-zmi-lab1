@@ -45,12 +45,14 @@ export class ArithMeanRanksService extends BaseService {
   }
 
   public getResRanks(row: IRow): IRow {
+    let inputRow: IRow = ArrayHelper.copyIRowArray(row);
+
     let res: IRow = { value: [] };
 
-    if (row.value.length > 0) {
+    if (inputRow.value.length > 0) {
       let intermed: { name: string; rank: number }[] = [];
       let idx: number = 1;
-      row.value.forEach((item) => {
+      inputRow.value.forEach((item) => {
         intermed.push({
           name: `a${idx}`,
           rank: item,
@@ -61,7 +63,7 @@ export class ArithMeanRanksService extends BaseService {
 
       intermed.sort(ArrayHelper.sortNumberValues);
 
-      let helpArr = row.value.sort(ArrayHelper.sortNumberArray);
+      let helpArr = inputRow.value.sort(ArrayHelper.sortNumberArray);
 
       intermed.forEach(item => {
         const count = ArrayHelper.numberOfRepetitions(item.rank, helpArr);
