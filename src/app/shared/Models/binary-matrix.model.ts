@@ -19,9 +19,9 @@ export interface IRowCells {
   values: ICell[];
 }
 
-export interface IMatrixDistancesWithSum {
-
-}
+// export interface IExpertRankings {
+//   experts: ICell[];
+// }
 
 export class BinaryMatrixModel {
   private _expertRankings: ICell[] = [];

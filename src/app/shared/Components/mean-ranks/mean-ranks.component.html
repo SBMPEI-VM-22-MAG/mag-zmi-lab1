@@ -33,7 +33,7 @@
       *ngFor="let item of rowMean.value"
       class="ion-padding-top ion-padding-bottom"
     >
-      <ion-text color="primary">{{ item }}</ion-text>
+      <ion-text color="primary">{{ item | number: '.1-1' }}</ion-text>
     </ion-col>
   </ion-row>
 

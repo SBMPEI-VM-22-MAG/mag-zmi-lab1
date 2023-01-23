@@ -1,7 +1,9 @@
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 import { Component, Input, OnInit, DoCheck } from '@angular/core';
 import { IRow } from '../../Models/base.model';
 import { KemenyMedianService } from '../../Services/kemeny-median.service';
-import { BinaryMatrixModel, IRowCells } from '../../Models/binary-matrix.model';
+import { BinaryMatrixModel, IRowCells, ICell } from '../../Models/binary-matrix.model';
 import { ArrayHelper } from '../../Helpers/array.helper';
 
 @Component({
@@ -36,5 +38,16 @@ export class KemenyComponent implements OnInit, DoCheck {
     });
     this.pairwiseDistanceMatrix = this.srv.getPairwiseDistanceMatrix(this.arrayBinaryMtx);
     this.arrSum = this.srv.getCalculationOfSumsOfDistancesAcrossRows(this.pairwiseDistanceMatrix);
+  }
+
+  getMin(dt: number[]) {
+    return Math.min.apply(Math, dt);
+  }
+
+  getExpRanks(data: BinaryMatrixModel): string {
+    const sortRow: ICell[] = data.ExpertRankingsValSortRanks;
+    let res: string[] = [];
+    sortRow.forEach(item => res.push(item.name));
+    return res.toString();
   }
 }

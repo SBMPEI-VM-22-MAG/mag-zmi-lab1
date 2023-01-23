@@ -52,43 +52,43 @@ export class HomePage implements OnInit {
   }
 
   onCreateObjFromHomeWork() {
-    this.obj = new BaseModel(5, 5);
+    this.obj = new BaseModel(6, 6);
 
     let rows: IRow[] = [
-      // {
-      //   value: [6, 3, 5, 2, 4, 1]
-      // },
-      // {
-      //   value: [6, 2, 4, 1, 5, 3]
-      // },
-      // {
-      //   value: [3, 1, 2, 4, 6, 5]
-      // },
-      // {
-      //   value: [5, 3, 2, 6, 4, 1]
-      // },
-      // {
-      //   value: [5, 2, 6, 1, 4, 3]
-      // },
-      // {
-      //   value: [1, 6, 4, 2, 3, 5]
-      // },
+      {
+        value: [6, 3, 5, 2, 4, 1]
+      },
+      {
+        value: [6, 2, 4, 1, 5, 3]
+      },
+      {
+        value: [3, 1, 2, 4, 6, 5]
+      },
+      {
+        value: [5, 3, 2, 6, 4, 1]
+      },
+      {
+        value: [5, 2, 6, 1, 4, 3]
+      },
+      {
+        value: [1, 6, 4, 2, 3, 5]
+      },
 
-      {
-        value: [5, 2, 4, 1, 3]
-      },
-      {
-        value: [2, 5, 4, 1, 3]
-      },
-      {
-        value: [5, 3, 2, 1, 4]
-      },
-      {
-        value: [5, 2, 1, 4, 3]
-      },
-      {
-        value: [2, 4, 3, 5, 1]
-      },
+      // {
+      //   value: [5, 2, 4, 1, 3]
+      // },
+      // {
+      //   value: [2, 5, 4, 1, 3]
+      // },
+      // {
+      //   value: [5, 3, 2, 1, 4]
+      // },
+      // {
+      //   value: [5, 2, 1, 4, 3]
+      // },
+      // {
+      //   value: [2, 4, 3, 5, 1]
+      // },
     ];
 
     for (let i = 0; i < rows.length; i++) {
