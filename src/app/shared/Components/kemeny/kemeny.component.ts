@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/member-ordering */
+/* eslint-disable no-trailing-spaces */
+/* eslint-disable @typescript-eslint/prefer-for-of */
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 import { Component, Input, OnInit, DoCheck } from '@angular/core';
@@ -17,6 +20,8 @@ export class KemenyComponent implements OnInit, DoCheck {
   arrayBinaryMtx: BinaryMatrixModel[] = [];
   pairwiseDistanceMatrix: IRow[] = [];
   arrSum: number [] = [];
+
+  answerDistanse: IKemenyDistanseRes[] = [];
 
   constructor(
     private srv: KemenyMedianService
@@ -38,16 +43,40 @@ export class KemenyComponent implements OnInit, DoCheck {
     });
     this.pairwiseDistanceMatrix = this.srv.getPairwiseDistanceMatrix(this.arrayBinaryMtx);
     this.arrSum = this.srv.getCalculationOfSumsOfDistancesAcrossRows(this.pairwiseDistanceMatrix);
+    this.answerDistanse = this.getDistanseAnswer();
   }
 
-  getMin(dt: number[]) {
+  private getMin(dt: number[]) {
     return Math.min.apply(Math, dt);
   }
 
-  getExpRanks(data: BinaryMatrixModel): string {
+  private getExpRanks(data: BinaryMatrixModel): string {
     const sortRow: ICell[] = data.ExpertRankingsValSortRanks;
     let res: string[] = [];
     sortRow.forEach(item => res.push(item.name));
     return res.toString();
   }
+
+  private getDistanseAnswer(): IKemenyDistanseRes[] {
+    let answerArr: IKemenyDistanseRes[] = [];
+    const min: number = Math.min.apply(Math, this.arrSum);
+
+    const search = ',';
+    const replaceWith = ', ';
+
+    for(let i = 0; i < this.arrSum.length; i++) {
+      if (this.arrSum[i] === min) {
+        answerArr.push({
+          answer: `Expert #${ i }: ${ this.getExpRanks(this.arrayBinaryMtx[i]).split(search).join(replaceWith) }`
+        });
+      }
+    }
+    return answerArr;
+  }
+}
+
+export interface IKemenyDistanseRes {
+  // expert: string;
+  // ranksStr: string;
+  answer: string;
 }

@@ -153,10 +153,40 @@
     </ion-col>
   </ion-row>
 
-  <ion-row>
+  <!-- <ion-row>
     <ion-col>{{ getMin(arrSum) | json }}</ion-col>
     <ion-col>{{ arrSum | json }}</ion-col>
     <ion-col>{{ getExpRanks(arrayBinaryMtx[0]) }}</ion-col>
+  </ion-row> -->
+
+  <ion-row>
+    <ion-col size="12">
+      <div class="hr"></div>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="12">Answer</ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="12">
+      <div class="hr"></div>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="my-custom-table ion-text-center" *ngFor="let item of answerDistanse">
+    <ion-col class="ion-padding-top ion-padding-bottom">
+      <ion-text color="tertiary">
+        <h6>{{ item.answer }}</h6>
+      </ion-text>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="12">
+      <div class="hr"></div>
+    </ion-col>
   </ion-row>
 
 </ion-grid>
