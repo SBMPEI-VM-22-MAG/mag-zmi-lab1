@@ -20,8 +20,11 @@ export class KemenyComponent implements OnInit, DoCheck {
   arrayBinaryMtx: BinaryMatrixModel[] = [];
   pairwiseDistanceMatrix: IRow[] = [];
   arrSum: number [] = [];
-
   answerDistanse: IKemenyDistanseRes[] = [];
+
+
+  preferenceVectors: IRow[] = [];
+  lossMtx: IRow[] = [];
 
   constructor(
     private srv: KemenyMedianService
@@ -37,6 +40,7 @@ export class KemenyComponent implements OnInit, DoCheck {
 
   onComputeBinaryRels() {
     this.arrayBinaryMtx = [];
+    this.preferenceVectors = [];
     this.tableRanks.forEach(item => {
       const mtx = new BinaryMatrixModel(item);
       this.arrayBinaryMtx.push(mtx);
@@ -44,6 +48,14 @@ export class KemenyComponent implements OnInit, DoCheck {
     this.pairwiseDistanceMatrix = this.srv.getPairwiseDistanceMatrix(this.arrayBinaryMtx);
     this.arrSum = this.srv.getCalculationOfSumsOfDistancesAcrossRows(this.pairwiseDistanceMatrix);
     this.answerDistanse = this.getDistanseAnswer();
+
+    this.tableRanks.forEach(row => {
+      const prefRow: IRow = { value: [] };
+      row.value.forEach(item => prefRow.value.push((item - 1)));
+      this.preferenceVectors.push(prefRow);
+    });
+
+    this.lossMtx = this.srv.getLossMtx(this.preferenceVectors);
   }
 
   private getMin(dt: number[]) {

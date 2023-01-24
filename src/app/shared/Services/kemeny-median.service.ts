@@ -82,4 +82,31 @@ export class KemenyMedianService extends BaseService {
 
     return result;
   }
+
+  private getCellsLossMtx(countProjects: number, colExpsMarks: IRow): IRow {
+    if (countProjects <= 0 || colExpsMarks.value.length === 0) return { value: [] };
+    let result: IRow = { value: [] };
+
+    for(let i = 0; i < countProjects; i++) {
+      let sum: number = 0;
+      colExpsMarks.value.forEach(item => sum += Math.abs(i - item));
+      result.value.push(sum);
+    }
+    return result;
+  }
+
+  public getLossMtx(preferenceVectors: IRow[]): IRow[] {
+    if (preferenceVectors.length === 0) return [];
+
+    let result: IRow[] = [];
+    const countProjs: number = preferenceVectors[0].value.length;
+
+    for(let i = 0; i < countProjs; i++) {
+      const colVals: IRow = this.getColValues(i, preferenceVectors);
+      const rowCellsLossMtx: IRow = this.getCellsLossMtx(countProjs, colVals);
+      result.push(rowCellsLossMtx);
+    }
+
+    return result;
+  }
 }
