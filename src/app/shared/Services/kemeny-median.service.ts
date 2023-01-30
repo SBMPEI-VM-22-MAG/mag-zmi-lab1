@@ -19,17 +19,17 @@ export class KemenyMedianService extends BaseService {
   }
 
   public getPairwiseDistanceMatrix(arrMtx: BinaryMatrixModel[]): IRow[] {
-    if(arrMtx.length === 0) return [];
-    if(arrMtx[0].MatrixBinary.length === 0) return [];
-    if(arrMtx[0].MatrixBinary[0].value.length === 0) return [];
+    if (arrMtx.length === 0) return [];
+    if (arrMtx[0].MatrixBinary.length === 0) return [];
+    if (arrMtx[0].MatrixBinary[0].value.length === 0) return [];
 
     let result: IRow[] = [];
     let mtxV: BinaryMatrixModel[] = arrMtx; // A
     let mtxH: BinaryMatrixModel[] = arrMtx; // B
 
-    for(let i = 0; i < mtxV.length; i++){
+    for (let i = 0; i < mtxV.length; i++) {
       let row: IRow = { value: [] };
-      for(let j = 0; j < mtxH.length; j++) {
+      for (let j = 0; j < mtxH.length; j++) {
         const val = this.getCalculationPairwiseDistances(mtxV[i].MatrixBinary, mtxH[j].MatrixBinary);
         row.value.push(val);
       }
@@ -41,15 +41,15 @@ export class KemenyMedianService extends BaseService {
 
   private getCalculationPairwiseDistances(mtxA: IRow[], mtxB: IRow[]): number {
     if (mtxA.length === 0 && mtxB.length === 0) return -1;
-    if(mtxA[0].value.length === 0 && mtxB[0].value.length === 0) return -1;
+    if (mtxA[0].value.length === 0 && mtxB[0].value.length === 0) return -1;
 
     let intermidateMtx: IRow[] = [];
     const countRows = mtxA.length;
     const countCols = mtxA[0].value.length;
 
-    for(let i = 0; i < countRows; i++) {
+    for (let i = 0; i < countRows; i++) {
       let row: IRow = { value: [] };
-      for(let j = 0; j < countCols; j++) {
+      for (let j = 0; j < countCols; j++) {
         const val = Math.abs(mtxA[i].value[j] - mtxB[i].value[j]);
         row.value.push(val);
       }
@@ -68,13 +68,13 @@ export class KemenyMedianService extends BaseService {
   }
 
   public getCalculationOfSumsOfDistancesAcrossRows(mtx: IRow[]): number[] {
-    if(mtx.length === 0) return [];
-    if(mtx[0].value.length === 0) return [];
+    if (mtx.length === 0) return [];
+    if (mtx[0].value.length === 0) return [];
 
     let result: number[] = [];
-    for(let i = 0; i < mtx.length; i++) {
+    for (let i = 0; i < mtx.length; i++) {
       let val = 0;
-      for(let j = 0; j < mtx.length; j++) {
+      for (let j = 0; j < mtx.length; j++) {
         val += mtx[i].value[j];
       }
       result.push(val);
@@ -87,7 +87,7 @@ export class KemenyMedianService extends BaseService {
     if (countProjects <= 0 || colExpsMarks.value.length === 0) return { value: [] };
     let result: IRow = { value: [] };
 
-    for(let i = 0; i < countProjects; i++) {
+    for (let i = 0; i < countProjects; i++) {
       let sum: number = 0;
       colExpsMarks.value.forEach(item => sum += Math.abs(i - item));
       result.value.push(sum);
@@ -101,7 +101,7 @@ export class KemenyMedianService extends BaseService {
     let result: IRow[] = [];
     const countProjs: number = preferenceVectors[0].value.length;
 
-    for(let i = 0; i < countProjs; i++) {
+    for (let i = 0; i < countProjs; i++) {
       const colVals: IRow = this.getColValues(i, preferenceVectors);
       const rowCellsLossMtx: IRow = this.getCellsLossMtx(countProjs, colVals);
       result.push(rowCellsLossMtx);
@@ -115,8 +115,8 @@ export class KemenyMedianService extends BaseService {
 
     // console.log(Math.min.apply(Math, lossMtx[0].value));
 
-    if(lossMtx.length === 0) return [];
-    if(lossMtx[0].value.length === 0) return [];
+    if (lossMtx.length === 0) return [];
+    if (lossMtx[0].value.length === 0) return [];
 
     let mtxFirst: IRow[] = [];
 
@@ -130,7 +130,7 @@ export class KemenyMedianService extends BaseService {
 
     let mtxSecond: IRow[] = [];
 
-    for(let i = 0; i < mtxFirst[0].value.length; i++) {
+    for (let i = 0; i < mtxFirst[0].value.length; i++) {
       let col = this.getColValues(i, mtxFirst);
       let min = Math.min.apply(Math, col.value) as number;
 
@@ -140,18 +140,74 @@ export class KemenyMedianService extends BaseService {
     }
 
     let res: IRow[] = [];
-    console.log(res);
-    for(let i = 0; i < mtxSecond.length; i++) {
+    // console.log(res);
+    for (let i = 0; i < mtxSecond.length; i++) {
       res.push({ value: [] });
     }
 
-    for(let i = 0; i < res.length; i++) {
-      for(let j = 0; j < mtxSecond.length; j++) {
+    for (let i = 0; i < res.length; i++) {
+      for (let j = 0; j < mtxSecond.length; j++) {
         res[j].value.push(mtxSecond[i].value[j]);
       }
       // mtxSecond[i].value.forEach(cell => res[i].value.push(cell));
     }
 
     return res;
+  }
+
+  public getAssignmentMtx(input: IRow[]): IRow[] {
+    if (input.length === 0) return [];
+    if (input[0].value.length === 0) return [];
+
+    let mtx: IRow[] = [];
+    input.forEach(row => mtx.push({ value: [...row.value] }));
+
+    // Create null mtx
+    let resMtx: IRow[] = [];
+    for (let i = 0; i < mtx.length; i++) {
+      resMtx.push({ value: [] });
+      for (let j = 0; j < mtx.length; j++) {
+        resMtx[i].value.push(0);
+      }
+    }
+
+    let idxRowArr: number[] = [-1];
+    while (this.isAssignmentMtxFull(resMtx) !== true) {
+      for (let i = 0; i < mtx.length; i++) {
+        if (!idxRowArr.includes(i)) {
+          let nullNum: number = 0;
+          for (let j = 0; j < mtx.length; j++) {
+            if (mtx[i].value[j] === 0) nullNum++;
+          }
+
+          if (nullNum === 1) {
+            for (let j = 0; j < mtx.length; j++) {
+              if (mtx[i].value[j] === 0) {
+                resMtx[i].value[j] = 1;
+                for(let k = 0; k < mtx.length; k++){
+                  mtx[k].value[j] = -1;
+                }
+              }
+
+              // console.log(mtx);
+            }
+            // mtx.forEach(row => row.value[idx] = -1);
+            idxRowArr.push(i);
+          }
+        }
+      }
+    }
+
+
+    return resMtx;
+  }
+
+  private isAssignmentMtxFull(assigMtx: IRow[]): boolean {
+    for (let i = 0; i < assigMtx.length; i++) {
+      const max = Math.max.apply(Math, assigMtx[i].value) as number;
+      // console.log(max);
+      if (max === 0) return false;
+    }
+    return true;
   }
 }

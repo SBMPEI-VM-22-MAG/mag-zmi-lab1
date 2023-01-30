@@ -378,6 +378,60 @@
   </ion-row>
 
 
+  <ion-row>
+    <ion-col size="12">
+      <ion-text color="danger">
+        <h1>RESULT</h1>
+      </ion-text>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <div class="hr"></div>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-grid fixed>
+        <ion-row class="my-custom-table ion-text-center">
+          <ion-col class="ion-padding-top ion-padding-bottom"></ion-col>
+          <ion-col
+            *ngFor="let item of assignmentMtx2[0].value; let idx = index"
+            style="background-color: bisque"
+            class="ion-padding-top ion-padding-bottom"
+          >
+            <span>{{ (idx + 1) }}</span>
+          </ion-col>
+        </ion-row>
+
+        <ion-row
+          *ngFor="let row of assignmentMtx2; let idx = index"
+          class="my-custom-table ion-text-center"
+        >
+          <ion-col
+            style="background-color: aqua"
+            class="ion-padding-top ion-padding-bottom"
+          >
+            <span>a{{ idx + 1 }}</span>
+          </ion-col>
+
+          <ion-col
+            *ngFor="let val of row.value"
+            [ngClass]="{ 'my-custom-bg-color': idx % 2 === 0 }"
+            class="ion-padding-top ion-padding-bottom"
+          >
+            <span style="font-weight: bolder;" *ngIf="val === 1">
+              <ion-text color="danger">
+                {{ val }}
+              </ion-text>
+            </span>
+            <span *ngIf="val !== 1">{{ val }}</span>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-col>
+  </ion-row>
 
 
 </ion-grid>

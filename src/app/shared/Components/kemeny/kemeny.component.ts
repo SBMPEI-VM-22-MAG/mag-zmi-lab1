@@ -61,6 +61,8 @@ export class KemenyComponent implements OnInit, DoCheck {
     this.lossMtx = this.srv.getLossMtx(this.preferenceVectors);
 
     this.assignmentMtx1 = this.srv.getMinOfRowsCols(this.lossMtx);
+
+    this.assignmentMtx2 = this.srv.getAssignmentMtx(this.assignmentMtx1);
   }
 
   private getMin(dt: number[]) {
