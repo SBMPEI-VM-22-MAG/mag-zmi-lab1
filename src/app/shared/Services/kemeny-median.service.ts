@@ -109,4 +109,49 @@ export class KemenyMedianService extends BaseService {
 
     return result;
   }
+
+  // assignment problem
+  public getMinOfRowsCols(lossMtx: IRow[]): IRow[] {
+
+    // console.log(Math.min.apply(Math, lossMtx[0].value));
+
+    if(lossMtx.length === 0) return [];
+    if(lossMtx[0].value.length === 0) return [];
+
+    let mtxFirst: IRow[] = [];
+
+    // поиск минимума в строке
+    lossMtx.forEach(row => {
+      let min = Math.min.apply(Math, row.value) as number;
+      let rowFirst: IRow = { value: [] };
+      row.value.forEach(cell => rowFirst.value.push(Math.abs(cell - min)));
+      mtxFirst.push(rowFirst);
+    });
+
+    let mtxSecond: IRow[] = [];
+
+    for(let i = 0; i < mtxFirst[0].value.length; i++) {
+      let col = this.getColValues(i, mtxFirst);
+      let min = Math.min.apply(Math, col.value) as number;
+
+      let rowSecond: IRow = { value: [] };
+      col.value.forEach(cell => rowSecond.value.push(Math.abs(cell - min)));
+      mtxSecond.push(rowSecond);
+    }
+
+    let res: IRow[] = [];
+    console.log(res);
+    for(let i = 0; i < mtxSecond.length; i++) {
+      res.push({ value: [] });
+    }
+
+    for(let i = 0; i < res.length; i++) {
+      for(let j = 0; j < mtxSecond.length; j++) {
+        res[j].value.push(mtxSecond[i].value[j]);
+      }
+      // mtxSecond[i].value.forEach(cell => res[i].value.push(cell));
+    }
+
+    return res;
+  }
 }

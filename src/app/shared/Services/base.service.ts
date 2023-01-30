@@ -12,7 +12,7 @@ export class BaseService {
   constructor() { }
 
   public getRowValues(idx: number, table: IRow[]): IRow {
-    if(table.length > 0 && idx <= table.length) {
+    if (table.length > 0 && idx <= table.length) {
       return table[idx];
     } else {
       return null;
@@ -20,7 +20,7 @@ export class BaseService {
   }
 
   public setRowValues(idx: number, row: IRow, table: IRow[]): IRow[] {
-    if(table.length > 0 && idx <= table.length) {
+    if (table.length > 0 && idx <= table.length) {
       table[idx] = row;
       return table;
     } else return [];
@@ -39,16 +39,15 @@ export class BaseService {
   }
 
   public setColValues(idx: number, row: IRow, table: IRow[]): IRow[] {
-    if (table.length > 0 && row.value.length === table.length) {
-      if (table[0].value.length > 0 && idx <= table[0].value.length) {
-        let i = 0;
-        table.forEach((item) => {
-          item.value[idx] = row.value[i];
-          i++;
-        });
-        return table;
-      } else return [];
-    }
+    if (table.length > 0 && row.value.length === table.length) return [];
+    if (table[0].value.length > 0 && idx <= table[0].value.length) return [];
+
+    let i = 0;
+    table.forEach((item) => {
+      item.value[idx] = row.value[i];
+      i++;
+    });
+    return table;
   }
 
   // Sort ranks
@@ -57,7 +56,7 @@ export class BaseService {
     if (obj.table.length > 0) {
       obj.table.forEach(item => {
         let ranks: number[] = [];
-        for(let i = 1; i <= item.value.length; i++) {
+        for (let i = 1; i <= item.value.length; i++) {
           ranks.push(item.value.indexOf(i) + 1);
         }
         result.push({ value: ranks });

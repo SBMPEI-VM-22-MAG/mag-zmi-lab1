@@ -26,6 +26,9 @@ export class KemenyComponent implements OnInit, DoCheck {
   preferenceVectors: IRow[] = [];
   lossMtx: IRow[] = [];
 
+  assignmentMtx1: IRow[] = [];
+  assignmentMtx2: IRow[] = [];
+
   constructor(
     private srv: KemenyMedianService
   ) { }
@@ -56,6 +59,8 @@ export class KemenyComponent implements OnInit, DoCheck {
     });
 
     this.lossMtx = this.srv.getLossMtx(this.preferenceVectors);
+
+    this.assignmentMtx1 = this.srv.getMinOfRowsCols(this.lossMtx);
   }
 
   private getMin(dt: number[]) {
@@ -79,7 +84,7 @@ export class KemenyComponent implements OnInit, DoCheck {
     for(let i = 0; i < this.arrSum.length; i++) {
       if (this.arrSum[i] === min) {
         answerArr.push({
-          answer: `Expert #${ i }: ${ this.getExpRanks(this.arrayBinaryMtx[i]).split(search).join(replaceWith) }`
+          answer: `Expert #${ i + 1 }: ${ this.getExpRanks(this.arrayBinaryMtx[i]).split(search).join(replaceWith) }`
         });
       }
     }
