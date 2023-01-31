@@ -172,7 +172,9 @@ export class KemenyMedianService extends BaseService {
     }
 
     let idxRowArr: number[] = [-1];
-    while (this.isAssignmentMtxFull(resMtx) !== true) {
+    let countTries: number = 0;
+    while (this.isAssignmentMtxFull(resMtx) !== true && countTries !== 50) {
+      countTries++;
       for (let i = 0; i < mtx.length; i++) {
         if (!idxRowArr.includes(i)) {
           let nullNum: number = 0;
